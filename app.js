@@ -8,7 +8,6 @@ var app = express();
 
 //  bodyParser middleware
 
-
 //Parses json data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
@@ -28,9 +27,11 @@ var person = [{
 }];
 
 
-//  Sets a static path where all the files are stored.
+//  Sets a static paths where all the files are stored.
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('assets'));
 
+//  Configuring the pug middleware
 app.set('views', './views');
 app.set('view engine', 'pug');
 
