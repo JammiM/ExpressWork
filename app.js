@@ -4,9 +4,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const pug = require('pug');
 
+
 var app = express();
-
-
 var cutomers = [{fn:'james'},{fn:'jack'},{fn:'jamie'}];
 
 //  BodyParser middleware (parses json data)
@@ -32,9 +31,14 @@ app.set('view engine', 'pug');
 
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!', users: cutomers })
-})
+});
 
 
+// Handler for the form post request
+app.post('/users/add', function (req, res) {
+  var newUser = { fn: req.body.firstName }
+  console.log(newUser);
+});
 
 
 
