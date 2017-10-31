@@ -6,8 +6,10 @@ const pug = require('pug');
 
 var app = express();
 
-//  bodyParser middleware
-//  Parses json data
+
+var cutomers = [{fn:'james'},{fn:'jack'},{fn:'jamie'}];
+
+//  BodyParser middleware (parses json data)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 
@@ -29,7 +31,7 @@ app.set('view engine', 'pug');
 
 
 app.get('/', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!' })
+  res.render('index', { title: 'Hey', message: 'Hello there!', users: cutomers })
 })
 
 
@@ -37,5 +39,5 @@ app.get('/', function (req, res) {
 
 
 app.listen(3000, function () {
-  console.log("Server running on port 3000...\n Press Ctrl & C to end the server.");
+  console.log("Server running on port 3000...\nPress Ctrl & C to end the server.");
 });

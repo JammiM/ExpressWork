@@ -3,3 +3,6 @@ extends partials/layout
 //- main heading
 block main
   h1= message
+  ul
+    each val in users
+      li=val.fn
