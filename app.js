@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const pug = require('pug');
-
+const expressValidator = require('express-validator');
 
 var app = express();
 var cutomers = [{fn:'james'},{fn:'jack'},{fn:'jamie'}];
@@ -21,6 +21,10 @@ app.use(express.static('assets'));
 
 
 
+//  Express Validator Middleware
+app.use(expressValidator());
+
+
 
 //  Configuring the pug middleware
 app.set('views', './views');
@@ -36,8 +40,19 @@ app.get('/', function (req, res) {
 
 // Handler for the form post request
 app.post('/users/add', function (req, res) {
-  var newUser = { fn: req.body.firstName }
-  console.log(newUser);
+
+  req.checkBody('firstName', 'First name is required').notEmpty();
+
+
+
+  var errors = req.validationErrors();
+
+  if(errors){
+      console.log('there was a error');
+  }else {
+    var newUser = { fn: req.body.firstName };
+  }
+    console.log('sucess');
 });
 
 
