@@ -6,17 +6,6 @@ block main
   ul
     each val in users
       li=val.fn + ':' + val.em
-    
-  h2 add customer
-  form(method="POST" action="/users/add")
-    label First name
-    br
-    input(type="text" name="firstName")
-    br
-    input(type="text" name="email")
-    br
-    input(type="submit" value="submit")
-    br
 
   if errors
     h3 There was an errors
