@@ -8,7 +8,7 @@ const mongojs = require('mongojs')
 
 var app = express();
 var users = [{fn:'james',em:'James@gmail.com'},{fn:'jack',em:'Jack@gmail.com'},{fn:'jamie',em:'Jamie@gmail.com'}];
-//var db = mongojs('customerapp', ['users']);
+var db = mongojs('customerapp', ['users']);
 
 //  BodyParser middleware (parses json data)
 app.use(bodyParser.json());
@@ -34,21 +34,22 @@ app.set('view engine', 'pug');
 
 
 
-
+// This is the home page.
 app.get('/', function (req, res) {
 
   // find everything
-/*  db.users.find(function (err, docs) {
+  db.users.find(function (err, docs) {
       // docs is an array of all the documents in mycollection
       console.log(docs);
       res.render('index', { title: 'People in database',
                             message: 'People in database',
                             users: docs });
-  });  */
-
+  });
+/*
   res.render('index', { title: 'People in database',
                         message: 'People in database',
                         users: users});
+                        */
 });
 
 
@@ -57,6 +58,7 @@ app.post('/users/add', function (req, res) {
 
   //Checks if the input field is not Empty
   req.checkBody('firstName', 'First name is required').notEmpty();
+  req.checkBody('lastName', 'Last name is required').notEmpty();
   req.checkBody('email', 'Enter a valid email address.').isEmail();
 
 
@@ -68,10 +70,18 @@ app.post('/users/add', function (req, res) {
       // Print the error on the error page.
       res.render('error', { title: 'Errors', message: 'There was errors !', users: users, errors: errors });
   }else {
-      var newUser = { fn: req.body.firstName };
-      console.log('Success : ' + req.body.firstName + ' was successfully added.');
+      var newUser = { fn: req.body.firstName,ln: req.body.lastName, em: req.body.email };
+
+      db.users.insert(newUser, function (error, result) {
+        if(error){
+          console.log(error);
+        }
+        res.redirect('/');
+      });
+
+      //console.log('Success : ' + req.body.firstName + ' was successfully added.');
       // Print the Success on the Success page.
-      res.render('sucess', { title: 'Success', message: 'Successfully added !', name: req.body.firstName, email: req.body.email, users: users });
+      //res.render('sucess', { title: 'Success', message: 'Successfully added !', name: 'Successfully added !' + req.body.firstName, email: req.body.email, users: users });
   }
 });//app.post
 
