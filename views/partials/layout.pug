@@ -4,7 +4,9 @@ html(lang='en')
     title= title
     meta(charset='utf-8')
     block scripts
-      link(href='style.css' rel='stylesheet')
+      link(href='assets/style.css' rel='stylesheet')
+      script(src='assets/main.js')
+
   body
     header
       section
@@ -15,4 +17,4 @@ html(lang='en')
       section
         h2 I'm the footer
         block scripts
-          script(src='jquery.js')
+          script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')

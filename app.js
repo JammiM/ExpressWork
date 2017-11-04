@@ -70,7 +70,10 @@ app.post('/users/add', function (req, res) {
       // Print the error on the error page.
       res.render('error', { title: 'Errors', message: 'There was errors !', users: users, errors: errors });
   }else {
+
+      // Creates a new object based on the form inputs.
       var newUser = { fn: req.body.firstName,ln: req.body.lastName, em: req.body.email };
+
 
       db.users.insert(newUser, function (error, result) {
         if(error){

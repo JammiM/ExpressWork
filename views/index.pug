@@ -5,8 +5,14 @@ block main
   h1= message
   ul
     each val in users
-      li=val.fn + ' ' + val.ln +  ' : '    + val.em
-    
+      li=val.fn+' '+val.ln+' : '+val.em
+        a(href="#") delete
+        //button(id=val.ln type="button") remove
+        
+        
+        
+        
+        
   h2 add customer
   form(method="POST" action="/users/add")
     label First name
