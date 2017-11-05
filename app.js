@@ -86,6 +86,13 @@ app.post('/users/add', function (req, res) {
   }
 });//app.post
 
+// Handler to remove a user based on their id
+app.delete('/users/delete/:id', function (req, res) {
+  console.log(req.params);
+});
+
+///users/delete/
+
 app.listen(3000, function () {
   console.log("Server running on port 3000...\nPress Ctrl & C to end the server.");
 });

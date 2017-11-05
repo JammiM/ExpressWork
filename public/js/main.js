@@ -9,11 +9,9 @@ function deleteUser() {
   var confirmation = confirm("Are you sure ?");
 
   if (confirmation) {
-    alert(1);
     $.ajax({
       type: 'DELETE',
-      url: '/users/delete' + $('.removeUser').data('id');
-
+      url: '/users/delete/' + $('.removeUser').data('id')
     }).done(function (response) {
       window.location.replace('/');
     });
