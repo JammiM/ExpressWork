@@ -45,13 +45,12 @@ app.get('/', function (req, res) {
                             message: 'People in database',
                             users: docs });
   });
-/*
+  /*
   res.render('index', { title: 'People in database',
                         message: 'People in database',
                         users: users});
                         */
 });
-
 
 // Handler for the form post request
 app.post('/users/add', function (req, res) {
@@ -71,9 +70,8 @@ app.post('/users/add', function (req, res) {
       res.render('error', { title: 'Errors', message: 'There was errors !', users: users, errors: errors });
   }else {
 
-      // Creates a new object based on the form inputs.
+      // Creates a new object based on the form inputs
       var newUser = { fn: req.body.firstName,ln: req.body.lastName, em: req.body.email };
-
 
       db.users.insert(newUser, function (error, result) {
         if(error){
