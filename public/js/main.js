@@ -6,9 +6,18 @@ $(document).ready(function(){
 
 
 function deleteUser() {
-  var confirm = confirm("Are you sure ?");
-  if (confirm) {
-        alert(1);
-  }
+  var confirmation = confirm("Are you sure ?");
 
-}
+  if (confirmation) {
+    alert(1);
+    $.ajax({
+      type: 'DELETE',
+      url: '/users/delete' + $('.removeUser').data('id');
+
+    }).done(function (response) {
+      window.location.replace('/');
+    });
+  } else {
+    return false;
+  }
+}//deleteUser
