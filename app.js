@@ -9,6 +9,7 @@ const mongojs = require('mongojs')
 var app = express();
 var users = [{fn:'james',em:'James@gmail.com'},{fn:'jack',em:'Jack@gmail.com'},{fn:'jamie',em:'Jamie@gmail.com'}];
 var db = mongojs('customerapp', ['users']);
+var ObjectId = mongojs.ObjectId;
 
 //  BodyParser middleware (parses json data)
 app.use(bodyParser.json());
@@ -88,8 +89,30 @@ app.post('/users/add', function (req, res) {
 
 // Handler to remove a user based on their id
 app.delete('/users/delete/:id', function (req, res) {
-  console.log(req.params.id);
-});
+
+
+  // Removes the user based on their ID
+  db.users.remove({_id: ObjectId(req.params.id)}, function (err, result) {
+
+    // If there's a error log it, otherwise redirect
+    if (err) {
+      console.log(err);
+    }
+    res.redirect('/');
+
+  });
+
+
+
+
+
+});//delete
+
+
+
+
+
+
 
 ///users/delete/
 
