@@ -5,8 +5,8 @@ block main
   h1= message
   ul
     each val in users
-      li.removeUser(data-id='' + val.id + '')=val.fn+' '+val.ln+' :   '+val.em
-        a(href="#") delete
+      li.removeUser(data-id="" + val._id + "")=val.fn+' '+val.ln+' :   '+val.em
+        a(href="#")  delete
         
   h2 add customer
   form(method="POST" action="/users/add")

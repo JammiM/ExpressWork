@@ -88,7 +88,7 @@ app.post('/users/add', function (req, res) {
 
 // Handler to remove a user based on their id
 app.delete('/users/delete/:id', function (req, res) {
-  console.log(req.params);
+  console.log(req.params.id);
 });
 
 ///users/delete/
